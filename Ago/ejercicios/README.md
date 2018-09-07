@@ -10,5 +10,5 @@ Este es el contenido de los archivos de esta carpeta:
 
 -**ejer02_parte3.ipynb** son las características de las distribuciones de probabilidad vistas en clase.
 
--**ejer02_parte1.ipynb** son las distribuciones que investigué.
+-**ejer02_parte4.ipynb** son las distribuciones que investigué.
 
