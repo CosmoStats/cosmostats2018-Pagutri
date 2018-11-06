@@ -4,6 +4,11 @@ que pueden utilizarse para experimentar con las fun-
 ciones de correlaciónen 2d.
 """
 
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+import math
+
 # Puntos en una malla cuadriculada
 def unif_cuad_dist(box_size, dist):
     X = np.arange(0.0, box_size + 1.0, dist)
@@ -34,7 +39,7 @@ def disc_dist(box_size, n_points, radius, x_0, y_0):
     return X, Y
 
 # Puntos sobre un disco, uniforme
-def unif_disc_dist(box_size, n_points, radius, x_0, y_0):
+def unif_disc_dist(n_points, radius, x_0, y_0):
     X = []
     Y = []
     
