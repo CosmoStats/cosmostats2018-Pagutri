@@ -105,7 +105,7 @@ def rand_circles_dist(box_size, n_rings, n_points_p_ring):
     return X, Y
 
 # Dibujar varias circunferencias del mismo tamaño
-# con centros aleatorioa, sin salirse de la caja
+# con centros aleatorios, sin salirse de la caja
 def unif_circles_dist(box_size, n_rings, n_points_p_ring, r_ring):
     x_0 = r_ring + (box_size - 2.0 * r_ring) * random.random()
     y_0 = r_ring + (box_size - 2.0 * r_ring) * random.random()
@@ -120,7 +120,7 @@ def unif_circles_dist(box_size, n_rings, n_points_p_ring, r_ring):
         
     return X, Y
 
-# Distribución aletoria (y cuadrada) de puntos
+# Distribución aleatoria (y cuadrada) de puntos
 def create_rand_dist(box_size, n_points):
     X = []
     Y = []
