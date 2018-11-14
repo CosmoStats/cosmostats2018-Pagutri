@@ -131,7 +131,7 @@ def create_rand_dist(box_size, n_points):
         
     return X, Y
 
-# Función para crear histogramas
+# Función para crear histogramas DD y RR
 def save_hist(x_data, y_data, box_size, bin_size):
     max_dist = math.sqrt(2.0 * box_size**2)
     n_points = len(x_data)
@@ -146,3 +146,20 @@ def save_hist(x_data, y_data, box_size, bin_size):
     histo = np.histogram(distances, bins = bins)
     return distances, histo
 
+# Función para crear histograma DR 
+def save_hist_DR(x1, y1, box_size1, x2, y2, box_size2, bin_size):
+    max_dist1 = math.sqrt(2.0 * box_size1**2)
+    max_dist2 = math.sqrt(2.0 * box_size2**2)
+    max_dist = max(max_dist2, max_dist1)
+    n1 = len(x1)
+    n2 = len(x2)
+    distances = []
+    bins = np.arange(0.0, max_dist, bin_size)
+    
+    for i in range(n1 - 1):
+        for j in range(i + 1, n2):
+            distance = math.sqrt((x1[i] - x2[j])**2 + (y1[i] - y2[j])**2)
+            distances.append(distance)
+    
+    histo = np.histogram(distances, bins = bins)
+    return distances, histo
