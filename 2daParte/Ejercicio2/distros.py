@@ -1,7 +1,7 @@
 """
 Funciones varias para crear distribuciones de puntos
 que pueden utilizarse para experimentar con las fun-
-ciones de correlaciónen 2d.
+ciones de correlación en 2d.
 """
 
 import numpy as np
@@ -55,7 +55,7 @@ def unif_disc_dist(n_points, radius, x_0, y_0):
     return X, Y
 
 # Puntos sobre un anillo
-def anillo_dist(box_size, n_points, r_int, r_ext, x_0, y_0):
+def anillo_dist(n_points, r_int, r_ext, x_0, y_0):
     X = []
     Y = []
     
