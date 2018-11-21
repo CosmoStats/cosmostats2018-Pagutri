@@ -8,7 +8,7 @@
 
 2. Calcula el espectro de potencias para las distribuciones que realizaste en el ejercicio 2 (punto 1), usando la derivación que vimos en clase
 
-<img src="https://latex.codecogs.com/gif.latex?\hat{P}(\mathbf{k})=V\left&space;|&space;\frac{1}{N}\sum_{i=gal}^N&space;e^{i&space;\mathbf{k\cdot&space;x}}\right&space;|^2&space;-\frac{V}{N}" title="\hat{P}(\mathbf{k})=V\left | \frac{1}{N}\sum_{i=gal}^N e^{i \mathbf{k\cdot x}}\right |^2 -\frac{V}{N}" />
+<img src="https://latex.codecogs.com/gif.latex?\hat{P}(\mathbf{k})=V\left&space;|&space;\frac{1}{N}\sum_{i=gal}^N&space;e^{-i&space;\mathbf{k\cdot&space;x}}\right&space;|^2&space;-\frac{V}{N}" title="\hat{P}(\mathbf{k})=V\left | \frac{1}{N}\sum_{i=gal}^N e^{i \mathbf{k\cdot x}}\right |^2 -\frac{V}{N}" />
 
   a) Determina un rango en k y usa 20-100 bins en kx y ky. 
   
