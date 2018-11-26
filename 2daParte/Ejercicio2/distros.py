@@ -2,6 +2,8 @@
 Funciones varias para crear distribuciones de puntos
 que pueden utilizarse para experimentar con las fun-
 ciones de correlación en 2d.
+
+Incluye los estimadores.
 """
 
 import numpy as np
@@ -163,3 +165,50 @@ def save_hist_DR(x1, y1, box_size1, x2, y2, box_size2, bin_size):
     
     histo = np.histogram(distances, bins = bins)
     return distances, histo
+
+"""
+Estimadores de funciones de distribución
+"""
+
+# Peebles - Hauser
+def peebles_hauser(DD, nD, nR, box_size, bin_size):
+    x_RR, y_RR = distros.create_rand_dist(box_size, nR)
+    dist_RR, histo_RR = distros.save_hist(x_RR, y_RR, box_size, bin_size)
+    RR = histo_RR[0]
+    
+    return nR * (nR - 1.0) * DD / (nD * (nD - 1.0) * RR) - 1.0
+
+# Davis - Peebles
+def davis_peebles(x_data, y_data, nR, box_size, bin_size):
+    x_RR, y_RR = distros.create_rand_dist(box_size, nR)
+    dist_RR, histo_RR = distros.save_hist(x_RR, y_RR, box_size, bin_size)
+    dist_DD, histo_DD = distros.save_hist(x_data, y_data, box_size, bin_size)
+    dist_DR, histo_DR = distros.save_hist_DR(x_data, y_data, box_size, x_RR, y_RR, box_size, bin_size)
+    inv_nest = math.sqrt(nR * (nR - 1.0) / (nD * (nD - 1.0))
+    DD = histo_DD[0]
+    DR = histo_DR[0]
+    
+    return inv_nest * DD / DR - 1.0
+
+# Hamilton
+def hamilton(x_data, y_data, nR, box_size, bin_size):
+    x_RR, y_RR = distros.create_rand_dist(box_size, nR)
+    dist_RR, histo_RR = distros.save_hist(x_RR, y_RR, box_size, bin_size)
+    dist_DD, histo_DD = distros.save_hist(x_data, y_data, box_size, bin_size)
+    dist_DR, histo_DR = distros.save_hist_DR(x_data, y_data, box_size, x_RR, y_RR, box_size, bin_size)
+    RR = histo_RR[0]
+    DD = histo_DD[0]
+    DR = histo_DR[0]
+    
+    return RR * DD / DR**2
+
+# Landy - Szalay
+def landy_szalay(x_data, y_data, nR, box_size, bin_size):
+    x_RR, y_RR = distros.create_rand_dist(box_size, nR)
+    dist_RR, histo_RR = distros.save_hist(x_RR, y_RR, box_size, bin_size)
+    dist_DD, histo_DD = distros.save_hist(x_data, y_data, box_size, bin_size)
+    inv_nest = math.sqrt(nR * (nR - 1.0) / (nD * (nD - 1.0))
+    DD = histo_DD[0]
+    RR = histo_RR[0]
+    
+    return inv_nest**2 * DD / RR + 1.0 - 2.0 * inv_nest * DR / RR
