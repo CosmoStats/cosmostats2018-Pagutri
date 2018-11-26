@@ -170,45 +170,32 @@ def save_hist_DR(x1, y1, box_size1, x2, y2, box_size2, bin_size):
 Estimadores de funciones de distribución
 """
 
-# Peebles - Hauser
-def peebles_hauser(DD, nD, nR, box_size, bin_size):
-    x_RR, y_RR = distros.create_rand_dist(box_size, nR)
-    dist_RR, histo_RR = distros.save_hist(x_RR, y_RR, box_size, bin_size)
-    RR = histo_RR[0]
-    
-    return nR * (nR - 1.0) * DD / (nD * (nD - 1.0) * RR) - 1.0
-
-# Davis - Peebles
-def davis_peebles(x_data, y_data, nR, box_size, bin_size):
+# Función que saca todos los histogramas
+def saca_los_XX(x_data, y_data, nR, box_size, bin_size):
     x_RR, y_RR = distros.create_rand_dist(box_size, nR)
     dist_RR, histo_RR = distros.save_hist(x_RR, y_RR, box_size, bin_size)
     dist_DD, histo_DD = distros.save_hist(x_data, y_data, box_size, bin_size)
     dist_DR, histo_DR = distros.save_hist_DR(x_data, y_data, box_size, x_RR, y_RR, box_size, bin_size)
-    inv_nest = math.sqrt(nR * (nR - 1.0) / (nD * (nD - 1.0))
+    nD = len(x_data)
+    inv_nest = math.sqrt(nR * (nR - 1.0) / (nD * (nD - 1.0)))
+    RR = histo_RR[0]
     DD = histo_DD[0]
     DR = histo_DR[0]
     
+    return RR, DD, DR, inv_nest
+
+# Peebles - Hauser
+def peebles_hauser(RR, DD, inv_nest):
+    return DD * inv_nest**2 / RR - 1.0
+
+# Davis - Peebles
+def davis_peebles(DD, DR, inv_nest):
     return inv_nest * DD / DR - 1.0
 
 # Hamilton
-def hamilton(x_data, y_data, nR, box_size, bin_size):
-    x_RR, y_RR = distros.create_rand_dist(box_size, nR)
-    dist_RR, histo_RR = distros.save_hist(x_RR, y_RR, box_size, bin_size)
-    dist_DD, histo_DD = distros.save_hist(x_data, y_data, box_size, bin_size)
-    dist_DR, histo_DR = distros.save_hist_DR(x_data, y_data, box_size, x_RR, y_RR, box_size, bin_size)
-    RR = histo_RR[0]
-    DD = histo_DD[0]
-    DR = histo_DR[0]
-    
+def hamilton(DD, RR, DR):
     return RR * DD / DR**2
 
 # Landy - Szalay
-def landy_szalay(x_data, y_data, nR, box_size, bin_size):
-    x_RR, y_RR = distros.create_rand_dist(box_size, nR)
-    dist_RR, histo_RR = distros.save_hist(x_RR, y_RR, box_size, bin_size)
-    dist_DD, histo_DD = distros.save_hist(x_data, y_data, box_size, bin_size)
-    inv_nest = math.sqrt(nR * (nR - 1.0) / (nD * (nD - 1.0))
-    DD = histo_DD[0]
-    RR = histo_RR[0]
-    
+def landy_szalay(DD, RR, DR, inv_nest):
     return inv_nest**2 * DD / RR + 1.0 - 2.0 * inv_nest * DR / RR
