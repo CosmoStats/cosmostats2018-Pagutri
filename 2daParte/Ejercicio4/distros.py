@@ -148,6 +148,20 @@ def save_hist(x_data, y_data, box_size, bin_size):
     histo = np.histogram(distances, bins = bins)
     return distances, histo
 
+# Función para crear histogramas DD y RR para un solo eje coordenado
+def save_hist_ax(data, box_size, bin_size):
+    n_points = len(data)
+    distances = []
+    bins = np.arange(0.0, box_size, bin_size)
+    
+    for i in range(n_points - 1):
+        for j in range(i + 1, n_points):
+            distance = data[i] - data[j]
+            distances.append(distance)
+    
+    histo = np.histogram(distances, bins = bins)
+    return distances, histo
+
 # Función para crear histograma DR 
 def save_hist_DR(x1, y1, box_size1, x2, y2, box_size2, bin_size):
     max_dist1 = math.sqrt(2.0 * box_size1**2)
@@ -161,6 +175,22 @@ def save_hist_DR(x1, y1, box_size1, x2, y2, box_size2, bin_size):
     for i in range(n1 - 1):
         for j in range(i + 1, n2):
             distance = math.sqrt((x1[i] - x2[j])**2 + (y1[i] - y2[j])**2)
+            distances.append(distance)
+    
+    histo = np.histogram(distances, bins = bins)
+    return distances, histo
+
+# Función para crear histograma DR para un solo eje coordenado
+def save_hist_DR_ax(data1, box_size1, data2, box_size2, bin_size):
+    max_dist = max(box_size2, box_size1)
+    n1 = len(data1)
+    n2 = len(data2)
+    distances = []
+    bins = np.arange(0.0, max_dist, bin_size)
+    
+    for i in range(n1 - 1):
+        for j in range(i + 1, n2):
+            distance = data1[i] - data2[j]
             distances.append(distance)
     
     histo = np.histogram(distances, bins = bins)
