@@ -37,7 +37,7 @@ git pull https://github.com/CosmoStats/cosmostats2018 master)
     e) Anisotrópica en espacio de corrimientos al rojo (censos de galaxias)
     
 
-7.- Funciones de correlación de orden superior. 
+7.- Funciones de correlación de orden superior (si el tiempo lo permite)
 
     a) Algoritmos
 
